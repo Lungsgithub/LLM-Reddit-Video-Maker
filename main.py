@@ -10,7 +10,7 @@ headers = {
 
 data = {
     "model": "dolphin-mistral",
-    "prompt": "Write a very short story for r/AmItheAsshole pretending a person in a very short form. Your story should feature a protagonist who is facing a moral dilemma involving a close family member or friend. The conflict should revolve around a specific event or decision that has caused tension. Be sure to include a little background to explain the relationships and why the situation is important. Use an outlandishly click baiting hook. The story should end with the protagonist questioning if they were in the wrong for their actions or decisions, providing enough context for readers to offer their judgment but otherwise keep it minimal. DO NOT MENTION YOU'RE AN AI MODEL. YOU ARE THE PROTAGONIST IN THE STORY. you also arent supposed to answer the question of whether you are the asshole or not, you ask the reader",
+    "prompt": "write a post about your life. something like r/aita. immediately start with the title",
     "stream": False
 }
 
