@@ -26,3 +26,10 @@ Name it "Background.webm"
 
 Run `python main.py`
 
+## Roadmap
+- [✅] prompting through Ollama
+- [✅] video creation through ffmpeg
+- [✅] overlay(of story)
+- [✅] TTS
+- [❌] Add TUI
+- [❌] Add Background music
