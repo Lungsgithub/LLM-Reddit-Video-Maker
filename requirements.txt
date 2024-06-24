@@ -19,7 +19,6 @@ imageio-ffmpeg==0.4.9
 moviepy==1.0.3
 multidict==6.0.5
 numpy==1.26.4
-openai==0.28.0
 opencv-python==4.9.0.80
 opencv-python-headless==4.9.0.80
 pillow==10.3.0
