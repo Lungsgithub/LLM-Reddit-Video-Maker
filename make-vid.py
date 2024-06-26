@@ -20,9 +20,8 @@ def split_video_if_necessary(video, max_duration=60):
             part.write_videofile(f"final_story_video_part{i + 1}.mp4", codec="libx264", audio_codec="aac")
 
 def create_reddit_style_text_image(text, size, font_size=24):
-    # Define a smaller size for the overlay
-    overlay_width = int(size[0] * 0.35)  # Reduce width padding
-    overlay_height = int(size[1] * 0.7)  # Reduce height padding
+    overlay_width = int(size[0] * 0.6)  # Smaller width (60% of video width)
+    overlay_height = size[1]  # Full height
     
     img = Image.new('RGBA', (overlay_width, overlay_height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
@@ -35,7 +34,7 @@ def create_reddit_style_text_image(text, size, font_size=24):
     username = "u/throwaway12345"
     subreddit = "r/AmItheAsshole"
 
-    wrapped_text = textwrap.fill(text, width=60)
+    wrapped_text = textwrap.fill(text, width=40)  # Adjust width for vertical format
     story_lines = wrapped_text.split('\n')
     story_height = sum([draw.textbbox((0, 0), line, font=text_font)[3] for line in story_lines])
 
@@ -70,6 +69,7 @@ def create_reddit_style_text_image(text, size, font_size=24):
 
     return rounded_rectangle
 
+
 with open('story.json', 'r') as f:
     data = json.load(f)
 
@@ -93,9 +93,13 @@ audio_clip = AudioFileClip("story_fast.mp3")
 audio_duration = audio_clip.duration
 video_duration = background_video.duration
 
-if (audio_duration > video_duration):
+if audio_duration > video_duration:
     loops = int(audio_duration // video_duration) + 1
     background_video = concatenate_videoclips([background_video] * loops)
+
+# Resize background video to vertical (9:16) format
+background_video = background_video.resize(height=1920)
+background_video = background_video.crop(x_center=background_video.w // 2, width=1080)
 
 final_video = background_video.subclip(0, audio_duration)
 
@@ -111,7 +115,7 @@ final_video = CompositeVideoClip([final_video, text_clip])
 final_video = final_video.set_audio(audio_clip)
 
 # Split video if necessary
-split_video_if_necessary(final_video, max_duration=60)
+split_video_if_necessary(final_video, max_duration=59)
 
 # Cleanup
 os.remove("story.mp3")

@@ -10,7 +10,7 @@ headers = {
 
 data = {
     "model": "dolphin-mistral",
-    "prompt": "write a post about your life. something like r/aita. immediately start with the title",
+    "prompt": "write a reddit post. something like r/aita. immediately start with the title",
     "stream": False
 }
 
