@@ -24,9 +24,12 @@ Clone this repository
 
 Run `pip install -r requirements.txt`
 
-Add an Background Video (works out of the box if you use webm format)
+Add an Background Video
 
 Name it "Background.webm"
+
+or change this line
+```background_video = VideoFileClip("Your-Video")```
 
 Run `python main.py`
 
