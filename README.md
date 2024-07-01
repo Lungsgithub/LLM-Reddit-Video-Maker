@@ -18,6 +18,10 @@ Install Ollama & dolphin-mistral
 
 Clone this repository
 
+#### If you're on windows
+- add [ffmpeg](https://ffmpeg.org/download.html) into folder
+- add the font [LiberationSerif](https://www.dafont.com/de/liberation-serif.font)
+
 Run `pip install -r requirements.txt`
 
 Add an Background Video (works out of the box if you use webm format)
