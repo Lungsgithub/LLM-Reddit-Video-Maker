@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 import textwrap
 import os
+import random
 
 def split_video_if_necessary(video, max_duration=60):
     if video.duration <= max_duration:
@@ -101,7 +102,12 @@ if audio_duration > video_duration:
 background_video = background_video.resize(height=1920)
 background_video = background_video.crop(x_center=background_video.w // 2, width=1080)
 
-final_video = background_video.subclip(0, audio_duration)
+# Calculate a random start time ensuring the audio fits within the video length
+max_start_time = max(0, video_duration - audio_duration)
+start_time = random.uniform(0, max_start_time)
+
+# Create final video subclip from random start time
+final_video = background_video.subclip(start_time, start_time + audio_duration)
 
 # Create text image with rounded rectangle
 size = (final_video.w, final_video.h)
@@ -120,5 +126,4 @@ split_video_if_necessary(final_video, max_duration=59)
 # Cleanup
 os.remove("story.mp3")
 os.remove("story_fast.mp3")
-os.remove("story.json")
 os.remove(text_img_path)
