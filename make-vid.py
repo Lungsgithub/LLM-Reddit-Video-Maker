@@ -2,7 +2,9 @@ from gtts import gTTS
 from moviepy.editor import VideoFileClip, AudioFileClip, concatenate_videoclips, CompositeVideoClip, ImageClip
 from pydub import AudioSegment
 from PIL import Image, ImageDraw, ImageFont
+from piper.voice import PiperVoice
 import json
+import wave
 import textwrap
 import os
 import random
@@ -77,19 +79,23 @@ with open('story.json', 'r') as f:
 story_text = data['story']
 
 # Text-to-speech conversion
-tts = gTTS(text=story_text, lang='en')
-tts.save("story.mp3")
+
+model = "models/en_US-amy-medium.onnx"
+voice = PiperVoice.load(model)
+wav_file = wave.open("story.wav", "w")
+audio = voice.synthesize(story_text,wav_file)
+
 
 # Speed up audio
-audio = AudioSegment.from_file("story.mp3")
-speed = 1.2
+audio = AudioSegment.from_file("story.wav")
+speed = 1.1
 new_audio = audio._spawn(audio.raw_data, overrides={"frame_rate": int(audio.frame_rate * speed)})
 new_audio = new_audio.set_frame_rate(audio.frame_rate)
-new_audio.export("story_fast.mp3", format="mp3")
+new_audio.export("story_fast.wav", format="wav")
 
 # Load video and audio
-background_video = VideoFileClip("Background.webm")
-audio_clip = AudioFileClip("story_fast.mp3")
+background_video = VideoFileClip("Background.mp4")
+audio_clip = AudioFileClip("story_fast.wav")
 
 audio_duration = audio_clip.duration
 video_duration = background_video.duration
@@ -124,6 +130,6 @@ final_video = final_video.set_audio(audio_clip)
 split_video_if_necessary(final_video, max_duration=59)
 
 # Cleanup
-os.remove("story.mp3")
-os.remove("story_fast.mp3")
+os.remove("story.wav")
+os.remove("story_fast.wav")
 os.remove(text_img_path)
