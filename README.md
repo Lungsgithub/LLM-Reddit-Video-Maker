@@ -20,9 +20,9 @@ Clone this repository
 
 Run `pip install -r requirements.txt`
 
-Add an Background Video (works out of the box if you use webm format)
+Add an Background Video (rename in script if need be)
 
-Name it "Background.webm"
+Add model from piper[https://github.com/rhasspy/piper/blob/master/VOICES.md]
 
 Run `python main.py`
 
@@ -31,5 +31,6 @@ Run `python main.py`
 - [✅] video creation through ffmpeg
 - [✅] overlay(of story)
 - [✅] TTS
+- [✅] Take TTS local
 - [❌] Add TUI
 - [❌] Add Background music
