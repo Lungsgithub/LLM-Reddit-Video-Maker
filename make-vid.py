@@ -1,4 +1,3 @@
-from gtts import gTTS
 from moviepy.editor import VideoFileClip, AudioFileClip, concatenate_videoclips, CompositeVideoClip, ImageClip
 from pydub import AudioSegment
 from PIL import Image, ImageDraw, ImageFont
